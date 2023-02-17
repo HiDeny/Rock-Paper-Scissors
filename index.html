@@ -31,6 +31,58 @@
         //  
         //  use console.log for testing outputs
 
+
+        // Get Computer Choice Function:
+        function getComputerChoice() {
+            let random = Math.floor(Math.random() * 3);
+            console.log(random);
+
+            let pick = '';
+            switch(random){
+                case 0:
+                    pick = 'rock';
+                    break;
+                
+                case 1:
+                    pick = 'paper';
+                    break;
+
+                case 2:
+                    pick = 'scissors';
+                    break;
+            }
+            console.log(pick);
+            return pick;
+        }
+
+        let computerSelection = getComputerChoice();
+        
+        
+        // Get playerSelection:
+        let playerSelection = prompt('Rock, paper or scissors?').toLowerCase();
+
+        // Play round function:
+        function playRound(computerSelection, playerSelection) {
+            if (playerSelection == computerSelection) {
+                return "It's a tie!";
+            } else if ( playerSelection === 'rock' && computerSelection === 'scissors') {
+                return 'Player win! Rock dull scissors';
+            } else if ( playerSelection === 'paper' && computerSelection === 'rock') {
+                return 'Player win! Paper covers rock';
+            } else if ( playerSelection === 'scissors' && computerSelection === 'paper') {
+                return 'Player win! Scissors cut paper.';
+            } else {
+                return 'Computer win!';
+            }
+        }
+
+        console.log(playRound(computerSelection,playerSelection));
+        console.log(computerSelection)
+        
+
+        // Play game function:
+        
+
     </script>
 </body>
 </html>
