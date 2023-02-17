@@ -104,20 +104,26 @@
             let playerPoints = 0;
 
             // Play game for 5 rounds
-            for (i = 0; i < 5; i++) {
-                 // Pick weapon
+            for (i = 1; i < 6; i++) {
+                console.log('Round: ' + i); 
+                // Pick weapon
                 let playerPick = getPlayerSelection();
                 let computerPick = getComputerChoice();
+                
+                // console.log("Player pick: " + playerPick);
+                // console.log("Computer pick: " + computerPick);
                 // Play
                 let game = playRound(computerPick,playerPick);
-                console.log(game);
+                // console.log(game);
                 // Count Points
                 if (game == 'Computer win!') {
                     computerPoints++;
+                    console.log(`Point for Computer! ${computerPick.toUpperCase()} defeat ${playerPick.toUpperCase()}!`);
                 } else if (game == 'Player win!') {
                     playerPoints++;
+                    console.log(`Point for Player! ${playerPick.toUpperCase()} defeat ${computerPick.toUpperCase()}!`);
                 } else {
-
+                    console.log("It's a TIE!");
                 }
 
             console.log("Player: " + playerPoints);
