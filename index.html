@@ -35,7 +35,7 @@
         // Get Computer Choice Function:
         function getComputerChoice() {
             let random = Math.floor(Math.random() * 3);
-            console.log(random);
+            // console.log(random);
 
             let pick = '';
             switch(random){
@@ -51,7 +51,7 @@
                     pick = 'scissors';
                     break;
             }
-            console.log(pick);
+            // console.log(pick);
             return pick;
         }
 
@@ -63,7 +63,7 @@
         function getPlayerSelection() {
             //
             let selection = prompt('Rock, paper or scissors?').toLowerCase();
-            console.log(selection);
+            // console.log(selection);
             if (selection == 'paper') {
                 return selection;
             } else if (selection == 'rock') {
@@ -82,26 +82,60 @@
             if (playerSelection == computerSelection) {
                 return "It's a tie!";
             } else if ( playerSelection === 'rock' && computerSelection === 'scissors') {
-                return 'Player win! Rock dull scissors';
+                return 'Player win!';
             } else if ( playerSelection === 'paper' && computerSelection === 'rock') {
-                return 'Player win! Paper covers rock';
+                return 'Player win!';
             } else if ( playerSelection === 'scissors' && computerSelection === 'paper') {
-                return 'Player win! Scissors cut paper.';
+                return 'Player win!';
             } else {
                 return 'Computer win!';
             }
         }
 
-        console.log(playRound(computerSelection,playerSelection));
-        console.log(computerSelection)
+        // console.log(playRound(computerSelection,playerSelection));
+        // console.log(computerSelection)
         
 
         // Play game function:
-        // function playGame(computerSelection, playerSelection) {
-        //     for (i = 0; i < 5; i++) {
-        //         playRound(computerSelection,playerSelection)
-        //     }
-        // }
+        function playGame() {
+
+            // Points count
+            let computerPoints = 0;
+            let playerPoints = 0;
+
+            // Play game for 5 rounds
+            for (i = 0; i < 5; i++) {
+                 // Pick weapon
+                let playerPick = getPlayerSelection();
+                let computerPick = getComputerChoice();
+                // Play
+                let game = playRound(computerPick,playerPick);
+                console.log(game);
+                // Count Points
+                if (game == 'Computer win!') {
+                    computerPoints++;
+                } else if (game == 'Player win!') {
+                    playerPoints++;
+                } else {
+
+                }
+
+            console.log("Player: " + playerPoints);
+            console.log("Computer: " + computerPoints);
+            }
+            
+            if (computerPoints > playerPoints) {
+                console.log("FINAL RESULT!");
+                console.log("....");
+                console.log("COMPUTER WINS!");
+            } else {
+                console.log("FINAL RESULT!");
+                console.log("....");
+                console.log("PLAYER WINS!");
+            }
+        }
+
+        playGame();
 
     </script>
 </body>
