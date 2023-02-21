@@ -55,7 +55,7 @@
             return pick;
         }
 
-        let computerSelection = getComputerChoice();
+        // let computerSelection = getComputerChoice();
         
         
         // Get playerSelection function:
@@ -64,18 +64,16 @@
             //
             let selection = prompt('Rock, paper or scissors?').toLowerCase();
             // console.log(selection);
-            if (selection == 'paper') {
-                return selection;
-            } else if (selection == 'rock') {
-                return selection;
-            } else if (selection == 'scissors') {
-                return selection
+            if (selection == 'paper' || selection == 'rock' ||selection == 'scissors') {
+                selection = selection;
             } else {
-                getPlayerSelection();
+                console.log('Wrong Input, try again.');
+                selection = getPlayerSelection();
             }
+            return selection;
         }
 
-        let playerSelection = getPlayerSelection();
+        // let playerSelection = getPlayerSelection();
 
         // Play round function:
         function playRound(computerSelection, playerSelection) {
@@ -108,16 +106,19 @@
                 console.log('Round: ' + i); 
                 // Pick weapon
                 let playerPick = getPlayerSelection();
-                let computerPick = getComputerChoice();
                 
+                let computerPick = getComputerChoice();
                 // console.log("Player pick: " + playerPick);
                 // console.log("Computer pick: " + computerPick);
+                
                 // Play
                 let game = playRound(computerPick,playerPick);
                 // console.log(game);
+
                 // Count Points
                 if (game == 'Computer win!') {
                     computerPoints++;
+                    console.log(playerPick);
                     console.log(`Point for Computer! ${computerPick.toUpperCase()} defeat ${playerPick.toUpperCase()}!`);
                 } else if (game == 'Player win!') {
                     playerPoints++;
@@ -134,14 +135,19 @@
                 console.log("FINAL RESULT!");
                 console.log("....");
                 console.log("COMPUTER WINS!");
-            } else {
+            } else if (playerPoints > computerPoints) {
                 console.log("FINAL RESULT!");
                 console.log("....");
                 console.log("PLAYER WINS!");
+            } else {
+                console.log("FINAL RESULT!");
+                console.log("....");
+                console.log("IT'S A TIE!");
             }
         }
 
         playGame();
+
 
     </script>
 </body>
