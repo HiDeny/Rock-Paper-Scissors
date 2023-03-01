@@ -24,7 +24,15 @@
 
         //Query selectors
         const buttons = document.querySelectorAll('button');
+        const rstBtn = document.querySelectorAll('.restart');
         const results = document.querySelector('.results');
+        const dispRound = document.querySelector('.round');
+        const dispPlayerPick = document.querySelector('.playerPick');
+        const dispPlayerPoints = document.querySelector('.playerPoints');
+        const dispComputerPick = document.querySelector('.computerPick');
+        const dispComputerPoints = document.querySelector('.computerPoints');
+        const dispGameResult = document.querySelector('.gameResult');
+        const dispFinal = document.querySelector('.final');
 
         // Show results 
         function showResults(result) {
@@ -58,106 +66,124 @@
         
 
         // Get playerSelection function:
-        let playerSelection;
+        let testPick;
 
         buttons.forEach((button) => {
             
             button.addEventListener('click', (e) => {
-                playerSelection = e.target.className;
+                testPick = e.target.className;
             });
         })
 
 
 
         // Play round function:
-        function playRound(playerSelection) {
-
-            let computerSelection = getComputerChoice();
+        function playRound(playerSelection, computerSelection) {
+            
 
             if (playerSelection == computerSelection) {
-                // showResults("It's a tie!");
-                return "It's a tie!";
-            } else if ( playerSelection === 'rock' && computerSelection === 'scissors') {
-                // showResults('Player win!')
-                return 'Player win!';
-            } else if ( playerSelection === 'paper' && computerSelection === 'rock') {
-                // showResults('Player win!')
-                return 'Player win!';
-            } else if ( playerSelection === 'scissors' && computerSelection === 'paper') {
-                // showResults('Player win!')
-                return 'Player win!';
-            } else {
-                // showResults('Computer win!')
-                return 'Computer win!';
+                return 2;
+            } else if ( playerSelection == 'rock') {
+                if (computerSelection == 'scissors') {
+                    return 1;
+                } else if (computerSelection == 'paper') {
+                    return 0;
+                } 
+            } else if ( playerSelection == 'paper') {
+                if (computerSelection == 'rock') {
+                    return 1;
+                } else if (computerSelection == 'scissors') {
+                    return 0;
+                }
+            } else if ( playerSelection == 'scissors') {
+                if (computerSelection == 'paper') {
+                    return 1;
+                } else if (computerSelection == 'rock') {
+                    return 0;
+                }
             }
         }
+
 
         // Results
         let round = 0;
         let computerPoints = 0;
         let playerPoints = 0;
-
+        
 
         // Play game function:
-        function playGame(playerSelection) {
+        function playGame() {
 
             // Play game for 5 rounds
             round++;
-            showResults('\nRound: ' + round); 
+            dispRound.textContent = 'Round: ' + round;
            
             // Pick weapon
             let computerPick = getComputerChoice();
+            let playerSelection = testPick;
                 
             // Play
-            let game = playRound(computerPick, playerSelection);
+            let game = playRound(playerSelection, computerPick);
 
                 // Count Points
-                if (game == 'Computer win!') {
+                if (game == 0) {
                     computerPoints++;
-                    showResults(`Player Pick :  ${playerSelection}`);
-                    showResults('Computer Pick : ' + computerPick);
-                    showResults(`Point for Computer! ${computerPick.toUpperCase()} defeat ${playerSelection.toUpperCase()}!`);
+                    dispPlayerPick.textContent = `Player Pick : ${playerSelection.toUpperCase()}`;
+                    dispComputerPick.textContent = `Computer Pick : ${computerPick.toUpperCase()}`;
+
+                    dispComputerPoints.textContent = "Computer: " + computerPoints;
+                    dispPlayerPoints.textContent = "Player: " + playerPoints;
+                    
+                    dispGameResult.textContent = `Point for Computer!`;
+                    
                 
-                } else if (game == 'Player win!') {
+                } else if (game == 1) {
                     playerPoints++;
-                    showResults('Player Pick : ' + playerSelection);
-                    showResults('Computer Pick : ' + computerPick);
-                    showResults(`Point for Player! ${playerSelection.toUpperCase()} defeat ${computerPick.toUpperCase()}!`);
+                    dispPlayerPick.textContent = `Player Pick : ${playerSelection.toUpperCase()}`;
+                    dispComputerPick.textContent = `Computer Pick : ${computerPick.toUpperCase()}`;
+
+                    dispComputerPoints.textContent = "Computer: " + computerPoints;
+                    dispPlayerPoints.textContent = "Player: " + playerPoints;
+                    
+                    dispGameResult.textContent = `Point for Player!`;
+                    
                 
                 } else {
-                    showResults('Player Pick : ' + playerSelection);
-                    showResults('Computer Pick : ' + computerPick);
-                    showResults("It's a TIE!");
+                    dispPlayerPick.textContent = `Player Pick : ${playerSelection.toUpperCase()}`;
+                    dispComputerPick.textContent = `Computer Pick : ${computerPick.toUpperCase()}`;
+
+                    dispComputerPoints.textContent = "Computer: " + computerPoints;
+                    dispPlayerPoints.textContent = "Player: " + playerPoints;
+                    
+                    dispGameResult.textContent = "It's a TIE!";
+                    
                 }
 
-            showResults("Player: " + playerPoints);
-            showResults("Computer: " + computerPoints);
+                if (round >= 5) {
+                    
+                    if (computerPoints > playerPoints) {
+                        results.innerHTML = `<h1>Computer WINS!</h1>
+                        <p>${playerPoints}  ${computerPoints}<p>`;
+                    } else if (playerPoints > computerPoints) {
+                        results.innerHTML = `<h1>Player WINS!</h1>
+                        <p>${playerPoints}  ${computerPoints}<p>`;
+                    } else {
+                        results.innerHTML = `
+                        <h1>It's a TIE!</h1>
+                        <p>${playerPoints}  ${computerPoints}<p>`;
+                   }
+                }
             }
             
-            // if (counter > 5) {
-            //     if (computerPoints > playerPoints) {
-            //         showResults("FINAL RESULT!");
-            //         showResults("....");
-            //         showResults("COMPUTER WINS!");
-            //     } else if (playerPoints > computerPoints) {
-            //         showResults("FINAL RESULT!");
-            //         showResults("....");
-            //         showResults("PLAYER WINS!");
-            //     } else {
-            //         showResults("FINAL RESULT!");
-            //         showResults("....");
-            //         showResults("IT'S A TIE!");
-            //     }
-            // }
         
+        
+            buttons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    playGame();
+                });
+            })
 
-        // playGame();
 
-
-    buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-            playGame(playerSelection);
-        });
-    })
+    
 
 
