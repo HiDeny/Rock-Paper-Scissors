@@ -4,151 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-    <script>
-        //  Get Computer Choice Function:
-        //      Pick: Rock, Paper, Scissors
-        //      connect it to an variable
-        //      
-        //  Play round function:
-        //      Play one round of the game.
-        //      Take two parameters: Player playerSelection, computerSelection.
-        //      return string with message with result
-        //      
-        //  Get playerSelection:
-        //      case-insensitive
-        //      use prompt to get input
-        //      
-        //  Play game function:
-        //      call play round function 5 times.
-        //      keep score
-        //      reports an winner or loser
-        //      use loops
-        //      console.log winner of each round.
-        //      console.log over all winner.
-        //  
-        //  use console.log for testing outputs
-
-
-        // Get Computer Choice Function:
-        function getComputerChoice() {
-            let random = Math.floor(Math.random() * 3);
-            // console.log(random);
-
-            let pick = '';
-            switch(random){
-                case 0:
-                    pick = 'rock';
-                    break;
-                
-                case 1:
-                    pick = 'paper';
-                    break;
-
-                case 2:
-                    pick = 'scissors';
-                    break;
-            }
-            // console.log(pick);
-            return pick;
-        }
-
-        // let computerSelection = getComputerChoice();
-        
-        
-        // Get playerSelection function:
-        
-        function getPlayerSelection() {
-            //
-            let selection = prompt('Rock, paper or scissors?').toLowerCase();
-            // console.log(selection);
-            if (selection == 'paper' || selection == 'rock' ||selection == 'scissors') {
-                selection = selection;
-            } else {
-                console.log('Wrong Input, try again.');
-                selection = getPlayerSelection();
-            }
-            return selection;
-        }
-
-        // let playerSelection = getPlayerSelection();
-
-        // Play round function:
-        function playRound(computerSelection, playerSelection) {
-            if (playerSelection == computerSelection) {
-                return "It's a tie!";
-            } else if ( playerSelection === 'rock' && computerSelection === 'scissors') {
-                return 'Player win!';
-            } else if ( playerSelection === 'paper' && computerSelection === 'rock') {
-                return 'Player win!';
-            } else if ( playerSelection === 'scissors' && computerSelection === 'paper') {
-                return 'Player win!';
-            } else {
-                return 'Computer win!';
-            }
-        }
-
-        // console.log(playRound(computerSelection,playerSelection));
-        // console.log(computerSelection)
-        
-
-        // Play game function:
-        function playGame() {
-
-            // Points count
-            let computerPoints = 0;
-            let playerPoints = 0;
-
-            // Play game for 5 rounds
-            for (i = 1; i < 6; i++) {
-                console.log('Round: ' + i); 
-                // Pick weapon
-                let playerPick = getPlayerSelection();
-                
-                let computerPick = getComputerChoice();
-                // console.log("Player pick: " + playerPick);
-                // console.log("Computer pick: " + computerPick);
-                
-                // Play
-                let game = playRound(computerPick,playerPick);
-                // console.log(game);
-
-                // Count Points
-                if (game == 'Computer win!') {
-                    computerPoints++;
-                    console.log(playerPick);
-                    console.log(`Point for Computer! ${computerPick.toUpperCase()} defeat ${playerPick.toUpperCase()}!`);
-                } else if (game == 'Player win!') {
-                    playerPoints++;
-                    console.log(`Point for Player! ${playerPick.toUpperCase()} defeat ${computerPick.toUpperCase()}!`);
-                } else {
-                    console.log("It's a TIE!");
-                }
-
-            console.log("Player: " + playerPoints);
-            console.log("Computer: " + computerPoints);
-            }
-            
-            if (computerPoints > playerPoints) {
-                console.log("FINAL RESULT!");
-                console.log("....");
-                console.log("COMPUTER WINS!");
-            } else if (playerPoints > computerPoints) {
-                console.log("FINAL RESULT!");
-                console.log("....");
-                console.log("PLAYER WINS!");
-            } else {
-                console.log("FINAL RESULT!");
-                console.log("....");
-                console.log("IT'S A TIE!");
-            }
-        }
-
-        playGame();
-
-
-    </script>
+    <div class="picks">
+        <h2>Pick One</h2>
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissors">Scissors</button>
+    </div>
+    <div class="results">
+        <h2>Results</h2>
+        <p></p>
+    </div>
 </body>
 </html>
