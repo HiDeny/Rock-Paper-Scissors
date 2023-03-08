@@ -32,6 +32,7 @@
         const dispComputerPoints = document.querySelector('.computerPoints');
         const dispGameResult = document.querySelector('.gameResult');
         const dispFinal = document.querySelector('.final');
+        const support = document.querySelector('.support');
 
         // Show results 
         function showResults(result) {
@@ -109,11 +110,12 @@
         let computerPoints = 0;
         let playerPoints = 0;
         
-
+        dispGameResult.textContent = "Let's Play!";
+        support.textContent = "(PICK YOUR WEAPON!)";
         // Play game function:
         function playGame() {
 
-            
+            support.textContent = '';
             // Pick weapon
             let computerPick = getComputerChoice();
             let playerSelection = testPick;
