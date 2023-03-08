@@ -23,10 +23,9 @@
 
 
         //Query selectors
-        const buttons = document.querySelectorAll('button');
+        const buttons = document.querySelectorAll('img');
         const results = document.querySelector('.results');
         const main = document.querySelector('.main');
-        const dispRound = document.querySelector('.round');
         const dispPlayerPick = document.querySelector('.playerPick');
         const dispPlayerPoints = document.querySelector('.playerPoints');
         const dispComputerPick = document.querySelector('.computerPick');
@@ -72,6 +71,7 @@
             
             button.addEventListener('click', (e) => {
                 testPick = e.target.className;
+                console.log(testPick);
             });
         })
 
@@ -106,7 +106,6 @@
 
 
         // Results
-        let round = 0;
         let computerPoints = 0;
         let playerPoints = 0;
         
@@ -114,10 +113,7 @@
         // Play game function:
         function playGame() {
 
-            // Play game for 5 rounds
-            round++;
-            dispRound.textContent = 'Round: ' + round;
-           
+            
             // Pick weapon
             let computerPick = getComputerChoice();
             let playerSelection = testPick;
@@ -128,32 +124,32 @@
                 // Count Points
                 if (game == 0) {
                     computerPoints++;
-                    dispPlayerPick.textContent = `Player Pick : ${playerSelection.toUpperCase()}`;
-                    dispComputerPick.textContent = `Computer Pick : ${computerPick.toUpperCase()}`;
+                    dispPlayerPick.textContent = `${playerSelection.toUpperCase()}`;
+                    dispComputerPick.textContent = `${computerPick.toUpperCase()}`;
 
-                    dispComputerPoints.textContent = "Computer: " + computerPoints;
-                    dispPlayerPoints.textContent = "Player: " + playerPoints;
+                    dispComputerPoints.textContent = computerPoints;
+                    dispPlayerPoints.textContent = playerPoints;
                     
                     dispGameResult.textContent = `Point for Computer!`;
                     
                 
                 } else if (game == 1) {
                     playerPoints++;
-                    dispPlayerPick.textContent = `Player Pick : ${playerSelection.toUpperCase()}`;
-                    dispComputerPick.textContent = `Computer Pick : ${computerPick.toUpperCase()}`;
+                    dispPlayerPick.textContent = `${playerSelection.toUpperCase()}`;
+                    dispComputerPick.textContent = `${computerPick.toUpperCase()}`;
 
-                    dispComputerPoints.textContent = "Computer: " + computerPoints;
-                    dispPlayerPoints.textContent = "Player: " + playerPoints;
+                    dispComputerPoints.textContent = computerPoints;
+                    dispPlayerPoints.textContent = playerPoints;
                     
                     dispGameResult.textContent = `Point for Player!`;
                     
                 
                 } else {
-                    dispPlayerPick.textContent = `Player Pick : ${playerSelection.toUpperCase()}`;
-                    dispComputerPick.textContent = `Computer Pick : ${computerPick.toUpperCase()}`;
+                    dispPlayerPick.textContent = `${playerSelection.toUpperCase()}`;
+                    dispComputerPick.textContent = `${computerPick.toUpperCase()}`;
 
-                    dispComputerPoints.textContent = "Computer: " + computerPoints;
-                    dispPlayerPoints.textContent = "Player: " + playerPoints;
+                    dispComputerPoints.textContent = computerPoints;
+                    dispPlayerPoints.textContent = playerPoints;
                     
                     dispGameResult.textContent = "It's a TIE!";
                     
@@ -162,18 +158,50 @@
                 if (computerPoints == 5 || playerPoints == 5) {
                     
                     if (computerPoints > playerPoints) {
-                        main.innerHTML = `<h1>Computer WINS!</h1>
-                        <h2>Player : ${playerPoints}  |   Computer: ${computerPoints}<h2>
-                        <button onClick="window.location.reload()">Restart</button>`;
+                        main.innerHTML = `
+                        <h1>Computer WINS!</h1>
+                        <div class="section">
+                            <div class="show">
+                                <h4>Player:<h4>
+                                <h2>${playerPoints}<h2>
+                            </div>
+                            <div class="show">
+                                <h4>Computer:<h4>
+                                <h2>${computerPoints}<h2>
+                            </div>
+                        </div>
+                        <button onClick="window.location.reload()">Play Again!</button>
+                        `;
                     } else if (playerPoints > computerPoints) {
-                        main.innerHTML = `<h1>Player WINS!</h1>
-                        <h2>Player : ${playerPoints}  |  Computer: ${computerPoints}<h2>
-                        <button onClick="window.location.reload()">Restart</button>`;
+                        main.innerHTML = `
+                        <h1>Player WINS!</h1>
+                        <div class="section">
+                            <div class="show">
+                                <h4>Player:<h4>
+                                <h2>${playerPoints}<h2>
+                            </div>
+                            <div class="show">
+                                <h4>Computer:<h4>
+                                <h2>${computerPoints}<h2>
+                            </div>
+                        </div>
+                        <button onClick="window.location.reload()">Play Again!</button>
+                        `;
                     } else {
                         main.innerHTML = `
                         <h1>It's a TIE!</h1>
-                        <h2>Player : ${playerPoints}  |  Computer: ${computerPoints}<h2>
-                        <button onClick="window.location.reload()">Restart</button>`;
+                        <div class="section">
+                            <div class="show">
+                                <h4>Player:<h4>
+                                <h2>${playerPoints}<h2>
+                            </div>
+                            <div class="show">
+                                <h4>Computer:<h4>
+                                <h2>${computerPoints}<h2>
+                            </div>
+                        </div>
+                        <button onClick="window.location.reload()">Play Again!</button>
+                        `;
                    }
                 }
             }
