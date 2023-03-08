@@ -24,8 +24,8 @@
 
         //Query selectors
         const buttons = document.querySelectorAll('button');
-        const rstBtn = document.querySelectorAll('.restart');
         const results = document.querySelector('.results');
+        const main = document.querySelector('.main');
         const dispRound = document.querySelector('.round');
         const dispPlayerPick = document.querySelector('.playerPick');
         const dispPlayerPoints = document.querySelector('.playerPoints');
@@ -159,18 +159,21 @@
                     
                 }
 
-                if (round >= 5) {
+                if (computerPoints == 5 || playerPoints == 5) {
                     
                     if (computerPoints > playerPoints) {
-                        results.innerHTML = `<h1>Computer WINS!</h1>
-                        <p>${playerPoints}  ${computerPoints}<p>`;
+                        main.innerHTML = `<h1>Computer WINS!</h1>
+                        <h2>Player : ${playerPoints}  |   Computer: ${computerPoints}<h2>
+                        <button onClick="window.location.reload()">Restart</button>`;
                     } else if (playerPoints > computerPoints) {
-                        results.innerHTML = `<h1>Player WINS!</h1>
-                        <p>${playerPoints}  ${computerPoints}<p>`;
+                        main.innerHTML = `<h1>Player WINS!</h1>
+                        <h2>Player : ${playerPoints}  |  Computer: ${computerPoints}<h2>
+                        <button onClick="window.location.reload()">Restart</button>`;
                     } else {
-                        results.innerHTML = `
+                        main.innerHTML = `
                         <h1>It's a TIE!</h1>
-                        <p>${playerPoints}  ${computerPoints}<p>`;
+                        <h2>Player : ${playerPoints}  |  Computer: ${computerPoints}<h2>
+                        <button onClick="window.location.reload()">Restart</button>`;
                    }
                 }
             }
